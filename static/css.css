@@ -27,6 +27,15 @@ a:active, a:hover { color: #ff0000; }
     color: #666666;
 }
 
+#map_wrapper {
+    float: left;
+    margin-right: 1.5em;
+    margin-bottom: 1em;
+}
+
 #map {
     border: solid 1px #666666;
+    float: left;
+    width: 400px;
+    height: 400px;
 }

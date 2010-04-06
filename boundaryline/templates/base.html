@@ -36,12 +36,24 @@ function init() {
 
 <div id="header" role="banner">
     <h1>OS OpenData Boundary-Line</h1>
-    <span>Boundary-Line shapes on OSM maps, by Matthew Somerville</span>
+    <span>Boundary-Line shapes on OSM maps, by Matthew Somerville &ndash; <a href="http://github.com/dracos/opendata-boundaryline">source code</a></span>
 </div>
 
 <div id="main" role="main">
 
-<div id="map" style="width:400px; height: 400px"></div>
+<div id="map_wrapper"><div id="map"></div></div>
+
+<h2>{{ council.name }}</h2>
+
+<ul>
+<li>Type: {{ council.area_code }}
+<li>ID: {{ council.number }}
+<li>Unit ID: {{ council.unit_id }}
+<li>ONS code: {{ council.code }}
+<li>Hectares: {{ council.hectares }}
+<li>Area: {{ council.area }}
+<li><a href="http://openlylocal.com/councils/snac_id/{{ council.code }}">OpenlyLocal</a>
+</ul>
 
 </div>
 
