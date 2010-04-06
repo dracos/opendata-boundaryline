@@ -18,7 +18,7 @@ bc. ./manage.py import_councils ../data/county_region.shp ../data/district_borou
 
 Make sure DEBUG is False, otherwise you'll soon run out of memory as it tries to remember all the SQL queries made.
 
-!>http://boundaryline.dracos.vm.bytemark.co.uk/static/bl-scrshot.png! This imports all the shape files for councils in Great Britain into a spatial database. That should be all you need to do - start up the dev web server, or whatever. The admin interface should let you view all the councils, including their boundaries. The front end will by default display Birmingham Council, but stick a different SNAC code on the end to view a different council. Firefox 3 runs out of stack space on some of the larger shapes, and it's all a bit slow, but I'm sure there will be some way to display less detail at lower zoom levels.
+This imports all the shape files for councils in Great Britain into a spatial database. That should be all you need to do - start up the dev web server, or whatever. The admin interface should let you view all the councils ("example screenshot":http://boundaryline.dracos.vm.bytemark.co.uk/static/bl-scrshot.png), including their boundaries. The front end will by default display Birmingham Council, but stick a different SNAC code on the end to view a different council. Firefox 3 runs out of stack space on some of the larger shapes, and it's all a bit slow, but I'm sure there will be some way to display less detail at lower zoom levels.
 
 The relevant bits of my Apache VirtualHost, for what it's worth, are as follows:
 
