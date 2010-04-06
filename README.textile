@@ -1,4 +1,4 @@
-A running installation this can be found at http://boundaryline.dracos.vm.bytemark.co.uk/
+A running installation can be found at "http://boundaryline.dracos.vm.bytemark.co.uk/":http://boundaryline.dracos.vm.bytemark.co.uk/
 
 h2. Installation
 
@@ -32,5 +32,7 @@ bc. <VirtualHost>
 h2. Todo
 
 * I've tried to make this a standalone Django app, but the CSS is currently in the project, not the app.  Other than that (which someone is welcome to fix), it should hopefully just slot in to any Django project; but I've probably done something wrong.
+
+* Investigate ways to make it quicker.
 
 Any comments or questions, do get in touch.
