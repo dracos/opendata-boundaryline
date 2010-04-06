@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block init %}init('/brum?wkt=1'){% endblock %}
+
+{% block content %}
+
+<h2>Birmingham constituencies before 2010 general election</h2>
+
+<ul>
+{% for const in consts %}
+<li>{{ const.name }}</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
+

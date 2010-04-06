@@ -5,34 +5,9 @@
     <link href="/static/css.css" rel="stylesheet" type="text/css">
     <script src="http://openlayers.org/api/OpenLayers.js"></script>
     <script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
-    <script>
-function init() {
-    var map = new OpenLayers.Map('map', {
-        controls: [
-            new OpenLayers.Control.Navigation()
-        ]
-    });
-
-    var osm = new OpenLayers.Layer.OSM.Mapnik('OpenStreetMap');
-    map.addLayer(osm);
-
-    /* There appears to be a bug in OpenLayers.Strategy.Fixed when the server
-     * returns just one feature. So just do it manually for the mo */
-    var http = new OpenLayers.Protocol.HTTP({
-        url: "/wkt/{{ council.code }}",
-        format: new OpenLayers.Format.WKT(),
-        callback: function(r) {
-            var layer = new OpenLayers.Layer.Vector("Council");
-            layer.addFeatures(r.features);
-            map.addLayer(layer);
-            map.zoomToExtent(r.features.geometry.getBounds());
-        }
-    });
-    http.read();
-}
-    </script>
+    <script src="/static/js.js"></script>
 </head>
-<body onload="init()">
+<body onload="{% block init %}{% endblock %}">
 
 <div id="header" role="banner">
     <h1>OS OpenData Boundary-Line</h1>
@@ -43,17 +18,8 @@ function init() {
 
 <div id="map_wrapper"><div id="map"></div></div>
 
-<h2>{{ council.name }}</h2>
-
-<ul>
-<li>Type: {{ council.area_code }}
-<li>ID: {{ council.number }}
-<li>Unit ID: {{ council.unit_id }}
-<li>ONS code: {{ council.code }}
-<li>Hectares: {{ council.hectares }}
-<li>Area: {{ council.area }}
-<li><a href="http://openlylocal.com/councils/snac_id/{{ council.code }}">OpenlyLocal</a>
-</ul>
+{% block content %}
+{% endblock %}
 
 </div>
 

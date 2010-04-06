@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block init %}init('/wkt/{{ council.code }}'){% endblock %}
+{% block content %}
+
+<h2>{{ council.name }}</h2>
+
+<ul>
+<li>Type: {{ council.area_code }}
+<li>ID: {{ council.number }}
+<li>Unit ID: {{ council.unit_id }}
+<li>ONS code: {{ council.code }}
+<li>Hectares: {{ council.hectares }}
+<li>Area: {{ council.area }}
+<li><a href="http://openlylocal.com/councils/snac_id/{{ council.code }}">OpenlyLocal</a>
+</ul>
+
+{% endblock %}
