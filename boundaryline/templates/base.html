@@ -8,7 +8,9 @@
     <script>
 function init() {
     var map = new OpenLayers.Map('map', {
-        controls: []
+        controls: [
+            new OpenLayers.Control.Navigation()
+        ]
     });
 
     var osm = new OpenLayers.Layer.OSM.Mapnik('OpenStreetMap');
