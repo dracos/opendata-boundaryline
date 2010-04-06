@@ -1,0 +1,36 @@
+A running installation this can be found at http://boundaryline.dracos.vm.bytemark.co.uk/
+
+h2. Installation
+
+This is a standard GeoDjango project. Install PostgreSQL and GeoDjango - I just "followed the instructions":http://docs.djangoproject.com/en/dev/ref/contrib/gis/install/.
+
+One thing - I'm on Debian lenny, and not only is the PostGIS that is installed missing SRID 900913, as the GeoDjango docs tell you, but SRID 27700 (British National Grid, and therefore quite important in this application) is incorrect.  After you've installed and got a PostGIS template, log in to it and update the proj4text column of SRID 27700 to include +datum=OSGB36.
+
+First, run the normal syncdb command to create the database tables and an admin user.
+
+bc. ./manage.py syncdb
+
+Download the relevant OS data from "their website":http://www.ordnancesurvey.co.uk/oswebsite/opendata (or "mySociety's mirror":http://parlvid.mysociety.org:81/os/) - you want Boundary-Line.
+
+Once you've unzipped that, you can import the data using the management command included, e.g.
+
+bc. ./manage.py import_councils ../data/county_region.shp ../data/district_borough_unitary_region.shp
+
+Make sure DEBUG is False, otherwise you'll soon run out of memory as it tries to remember all the SQL queries made.
+
+This imports all the shape files for councils in Great Britain into a spatial database. That should be all you need to do - start up the dev web server, or whatever. The admin interface should let you view all the councils, including their boundaries. The front end will by default display Birmingham Council, but stick a different SNAC code on the end to view a different council. Firefox 3 runs out of stack space on some of the larger shapes, and it's all a bit slow, but I'm sure there will be some way to display less detail at lower zoom levels.
+
+The relevant bits of my Apache VirtualHost, for what it's worth, are as follows:
+
+bc. <VirtualHost>
+    Alias /static/ [...]/project/static/
+    WSGIDaemonProcess gazetteer processes=5 threads=1
+    WSGIProcessGroup gazetteer
+    WSGIScriptAlias / [...]/project/apache/django.wsgi
+</VirtualHost>
+
+h2. Todo
+
+* I've tried to make this a standalone Django app, but the CSS is currently in the project, not the app.  Other than that (which someone is welcome to fix), it should hopefully just slot in to any Django project; but I've probably done something wrong.
+
+Any comments or questions, do get in touch.
