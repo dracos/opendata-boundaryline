@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>OS OpenData Boundary-Line demo</title>
+    <link href="/static/css.css" rel="stylesheet" type="text/css">
+    <script src="http://openlayers.org/api/OpenLayers.js"></script>
+    <script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+    <script>
+function init() {
+    var map = new OpenLayers.Map('map', {
+        controls: []
+    });
+
+    var osm = new OpenLayers.Layer.OSM.Mapnik('OpenStreetMap');
+    map.addLayer(osm);
+
+    /* There appears to be a bug in OpenLayers.Strategy.Fixed when the server
+     * returns just one feature. So just do it manually for the mo */
+    var http = new OpenLayers.Protocol.HTTP({
+        url: "/wkt/{{ council.code }}",
+        format: new OpenLayers.Format.WKT(),
+        callback: function(r) {
+            var layer = new OpenLayers.Layer.Vector("Council");
+            layer.addFeatures(r.features);
+            map.addLayer(layer);
+            map.zoomToExtent(r.features.geometry.getBounds());
+        }
+    });
+    http.read();
+}
+    </script>
+</head>
+<body onload="init()">
+
+<div id="header" role="banner">
+    <h1>OS OpenData Boundary-Line</h1>
+    <span>Boundary-Line shapes on OSM maps, by Matthew Somerville</span>
+</div>
+
+<div id="main" role="main">
+
+<div id="map" style="width:400px; height: 400px"></div>
+
+</div>
+
+<div id="footer" role="navigation">
+    <p>This site uses Ordnance Survey data © Crown copyright and database
+    right 2010. Data may be used under the terms of the
+    <a href="http://www.ordnancesurvey.co.uk/oswebsite/opendata/">OS OpenData</a>
+    licence. The map data is CC-By-SA by <a href="http://openstreetmap.org/">OpenStreetMap</a>.</p>
+</div>
+
+</body>
+</html>
